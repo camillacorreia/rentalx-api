@@ -2,7 +2,11 @@
   <img alt="" title="" src="github/logo.png">
 </h1>
 
-# Cadastro de carro
+# Diagrama
+
+<h1 align="center">
+  <img alt="" title="" src="github/diagrama.png">
+</h1>
 
 **Requisitos Funcionais**
 
