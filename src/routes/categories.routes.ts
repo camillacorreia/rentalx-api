@@ -5,20 +5,20 @@ const categoriesRoutes = Router();
 
 const categories = [];
 
-categoriesRoutes.post('/categories', (request, response) => {
+categoriesRoutes.post('/', (request, response) => {
   const id = uuidv4();
   const { name, description } = request.body;
 
-  const categorie = {
+  const category = {
     id,
     name,
     description,
     created_at: new Date(),
   };
 
-  categories.push(categorie);
+  categories.push(category);
 
-  return response.status(201).json(categorie);
+  return response.status(201).json(category);
 });
 
 export { categoriesRoutes };
