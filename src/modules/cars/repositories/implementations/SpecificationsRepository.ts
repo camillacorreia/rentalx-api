@@ -1,3 +1,5 @@
+import { getRepository, Repository } from 'typeorm';
+
 import { Specification } from '../../entities/Specification';
 import {
   ISpecificationsRepository,
@@ -5,44 +7,35 @@ import {
 } from '../ISpecificationsRepository';
 
 class SpecificationsRepository implements ISpecificationsRepository {
-  private spefications: Specification[];
+  private repository: Repository<Specification>;
 
   constructor() {
-    this.spefications = [];
+    this.repository = getRepository(Specification);
   }
 
-  private static INSTANCE: SpecificationsRepository;
-
-  public static getInstance(): SpecificationsRepository {
-    if (!SpecificationsRepository.INSTANCE) {
-      SpecificationsRepository.INSTANCE = new SpecificationsRepository();
-    }
-
-    return SpecificationsRepository.INSTANCE;
-  }
-
-  create({ name, description }: ICreateSpecificationDTO): Specification {
-    const specification = new Specification();
-
-    Object.assign(specification, {
+  async create({
+    name,
+    description,
+  }: ICreateSpecificationDTO): Promise<Specification> {
+    const specification = this.repository.create({
       name,
       description,
-      created_at: new Date(),
     });
 
-    this.spefications.push(specification);
+    await this.repository.save(specification);
 
     return specification;
   }
 
-  list(): Specification[] {
-    return this.spefications;
+  async list(): Promise<Specification[]> {
+    const spefications = await this.repository.find();
+
+    return spefications;
   }
 
-  findByName(name: string): Specification {
-    const specification = this.spefications.find(
-      (specification) => specification.name === name
-    );
+  async findByName(name: string): Promise<Specification> {
+    // Select * from categories where name = "name" limit 1
+    const specification = await this.repository.findOne({ name });
 
     return specification;
   }
