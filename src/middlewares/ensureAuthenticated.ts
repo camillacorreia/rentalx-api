@@ -22,18 +22,22 @@ export async function ensureAuthenticated(
   const [, token] = authHeader.split(' ');
 
   try {
-    const { sub: user_id } = verify(
+    const { sub: userId } = verify(
       token,
       '0f392cb1e7ae8e4c751daf48ba1a5c02'
     ) as IPaylod;
 
     const usersRepository = new UsersRepository();
 
-    const user = await usersRepository.findById(user_id);
+    const user = await usersRepository.findById(userId);
 
     if (!user) {
       throw new AppError('User does not exists!', 401);
     }
+
+    request.user = {
+      id: userId,
+    };
 
     next();
   } catch {
