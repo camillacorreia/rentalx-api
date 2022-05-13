@@ -6,7 +6,7 @@
   "author": "Camilla Correia <camillajesuscorreia@hotmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts",
+    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli",
     "docker": "docker-compose up",
     "test": "jest"
@@ -25,6 +25,7 @@
     "pg": "^8.7.3",
     "reflect-metadata": "^0.1.13",
     "swagger-ui-express": "^4.3.0",
+    "ts-jest": "^27.1.4",
     "tsyringe": "^4.6.0",
     "typeorm": "0.2.45",
     "uuid": "^8.3.2"
@@ -44,7 +45,6 @@
     "eslint-plugin-prettier": "^4.0.0",
     "jest": "^27.5.1",
     "prettier": "^2.6.0",
-    "ts-jest": "^27.1.4",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.6.2"
   }
