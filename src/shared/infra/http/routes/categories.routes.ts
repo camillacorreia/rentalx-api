@@ -2,8 +2,9 @@ import { CreateCategoryController } from '@modules/cars/useCases/createCategory/
 import { ImportCategoryController } from '@modules/cars/useCases/importCategory/ImportCategoryController';
 import { ListCategoriesController } from '@modules/cars/useCases/listCategory/ListCategoriesController';
 import { Router } from 'express';
-import { ensureAuthenticated } from 'middlewares/ensureAuthenticated';
 import multer from 'multer';
+
+import { ensureAuthenticated } from '@shared/infra/http/middlewares/ensureAuthenticated';
 
 const categoriesRoutes = Router();
 
